@@ -23,16 +23,12 @@ GOTTY_PORT  = os.environ.get('SERVER_PORT') or os.environ.get('GOTTY_PORT') or "
 # ========== 固定配置 ==========
 GOTTY_VERSION = "v1.8.0"  # 版本号
 GOTTY_COMMAND = ["bash"]  # gotty 执行的命令
-
-# ========== 全局临时目录追踪 ==========
 _temp_dirs = []   # 存储所有需要清理的临时目录路径
 
 def register_temp_dir(path):
-    """注册一个临时目录，程序退出时自动删除"""
     _temp_dirs.append(path)
 
 def cleanup_temp_dirs():
-    """清理所有已注册的临时目录"""
     for path in _temp_dirs:
         try:
             if os.path.exists(path):
@@ -45,7 +41,6 @@ def cleanup_temp_dirs():
 atexit.register(cleanup_temp_dirs)
 
 # ========== 工具函数 ==========
-
 def get_system_info():
     system = platform.system().lower()
     machine = platform.machine().lower()
