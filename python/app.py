@@ -18,12 +18,11 @@ from pathlib import Path
 # ---------- 环境变量配置（可选） ----------
 ARGO_DOMAIN = os.environ.get("ARGO_DOMAIN") or ""     # 固定隧道域名,留空使用临时隧道
 ARGO_AUTH   = os.environ.get("ARGO_AUTH") or ""       # 隧道token
-GOTTY_PORT  = os.environ.get("GOTTY_PORT") or "8080"  # gotty 端口
+GOTTY_PORT  = os.environ.get('SERVER_PORT') or os.environ.get('GOTTY_PORT') or "8080"  # gotty 端口
 
 # ========== 固定配置 ==========
-GOTTY_VERSION = "v1.8.0"
-CLOUDFLARED_VERSION = "2025.8.0"   # 备用版本
-GOTTY_COMMAND = ["bash"]           # gotty 执行的命令
+GOTTY_VERSION = "v1.8.0"  # 版本号
+GOTTY_COMMAND = ["bash"]  # gotty 执行的命令
 
 # ========== 全局临时目录追踪 ==========
 _temp_dirs = []   # 存储所有需要清理的临时目录路径
@@ -140,7 +139,7 @@ def setup_cloudflared():
         download_file(url, dest_path, "cloudflared")
     except Exception:
         print("   最新版下载失败，尝试备用版本...")
-        url_v = f"https://github.com/cloudflare/cloudflared/releases/download/{CLOUDFLARED_VERSION}/{filename}"
+        url_v = f"https://github.com/cloudflare/cloudflared/releases/download/2025.8.0/{filename}"
         try:
             download_file(url_v, dest_path, "cloudflared")
         except Exception as e:
