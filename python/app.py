@@ -18,8 +18,8 @@ from pathlib import Path
 # ---------- 环境变量配置（可选） ----------
 ARGO_DOMAIN = os.environ.get("ARGO_DOMAIN") or ""     # 固定隧道域名,留空使用临时隧道
 ARGO_AUTH   = os.environ.get("ARGO_AUTH") or ""       # 隧道token
-USER     = os.environ.get("USER") or "admin"      # 认证用户名
-PASSWORD = os.environ.get("PASSWORD") or "admin"  # 认证密码
+USER     = os.environ.get("USER") or "admin"          # 认证用户名
+PASSWORD = os.environ.get("PASSWORD") or "123456"     # 认证密码
 GOTTY_PORT  = os.environ.get('SERVER_PORT') or os.environ.get('GOTTY_PORT') or "8080"  # gotty 端口
 
 # ========== 固定配置 ==========
