@@ -1,0 +1,17 @@
+{
+  "name": "gotty-deploy",
+  "version": "1.0.0",
+  "description": "gotty-deploy",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "tar": "latest",
+    "adm-zip": "latest"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
