@@ -18,6 +18,8 @@ from pathlib import Path
 # ---------- 环境变量配置（可选） ----------
 ARGO_DOMAIN = os.environ.get("ARGO_DOMAIN") or ""     # 固定隧道域名,留空使用临时隧道
 ARGO_AUTH   = os.environ.get("ARGO_AUTH") or ""       # 隧道token
+USER     = os.environ.get("USER") or "admin"      # 认证用户名
+PASSWORD = os.environ.get("PASSWORD") or "admin"  # 认证密码
 GOTTY_PORT  = os.environ.get('SERVER_PORT') or os.environ.get('GOTTY_PORT') or "8080"  # gotty 端口
 
 # ========== 固定配置 ==========
@@ -149,7 +151,7 @@ def setup_cloudflared():
 # ========== 启动服务 ==========
 
 def run_gotty(gotty_path):
-    cmd = [gotty_path, "-p", GOTTY_PORT] + GOTTY_COMMAND
+    cmd = [gotty_path, "-p", GOTTY_PORT, "-w", "--credential", f"{USER}:{PASSWORD}"] + GOTTY_COMMAND
     print(f"🚀 启动 gotty (端口 {GOTTY_PORT})")
     proc = subprocess.Popen(
         cmd,
@@ -266,6 +268,7 @@ def main():
         print(f"   固定域名: https://{ARGO_DOMAIN}")
     else:
         print("   临时域名请见上方")
+    print(f"🔑 认证信息: 用户名: {USER} / 密码: {PASSWORD}")
     print("=" * 50 + "\n")
 
     procs = {
